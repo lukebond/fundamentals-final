@@ -1,0 +1,27 @@
+version: '3'
+networks:
+  frontend:
+  backend:
+services:
+  database:
+    user: postgres
+    build: database
+    environment:
+    - POSTGRES_USER=gordonuser
+    - POSTGRES_DB=ddev
+    networks:
+    - backend
+  api:
+    user: gordon
+    build: api
+    ports:
+    - 8080:8080
+    networks:
+    - frontend
+    - backend
+  ui:
+    build: ui
+    ports:
+    - 3000:3000
+    networks:
+    - frontend
